@@ -11,7 +11,7 @@ public static class StudentsEndpoints
 
         routes.MapPost("/api/students", (Student student) =>
         {
-            student.Id = students.Count + 1;
+            student.Id = Student.GetSeedId();
             students.Add(student);
             return Results.CreatedAtRoute("Students", new { id = student.Id }, student);
         });
