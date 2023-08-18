@@ -1,57 +1,46 @@
+using Grade.Api.Repositories;
+
 namespace Grade.Api.Entities;
 
 public static class StudentsEndpoints
 {
-    static readonly List<Student> students = new List<Student>();
     public static RouteGroupBuilder MapStudentsEndpoints(this IEndpointRouteBuilder routes)
     {
+        StudentRepository studentRepository = new();
+
         var studentRoutes = routes.MapGroup("/api/students");
 
-        studentRoutes.MapGet("/", () => students);
+        studentRoutes.MapGet("/", () => studentRepository.GetAll());
 
-        routes.MapPost("/api/students", (Student student) =>
+        studentRoutes.MapPost("/", (Student student) =>
         {
-            student.Id = Student.GetSeedId();
-            students.Add(student);
+            studentRepository.Create(student);
             return Results.CreatedAtRoute("Students", new { id = student.Id }, student);
         });
 
         studentRoutes.MapGet("/{id}", (int id) =>
         {
-            var student = students.Find(student => student.Id == id);
-
-            if (student is null)
-            {
-                return Results.NotFound();
-            }
-
-            return Results.Ok(student);
+            Student? student = studentRepository.Get(id);
+            return student is null ? Results.NotFound() : Results.Ok(student);
         }).WithName("Students");
 
         studentRoutes.MapPut("/{id}", (int id, Student updatedStudent) =>
         {
-            var existingStudent = students.Find(student => student.Id == id);
+            var existingStudent = studentRepository.Get(id);
 
-            if (existingStudent is null)
-            {
-                return Results.NotFound();
-            }
+            if (existingStudent is null) return Results.NotFound();
 
-            existingStudent.Name = updatedStudent.Name;
-
+            studentRepository.Update(id, updatedStudent);
             return Results.NoContent();
         });
 
         studentRoutes.MapDelete("/{id}", (int id) =>
         {
-            var student = students.Find(student => student.Id == id);
+            var student = studentRepository.Get(id);
 
-            if (student is null)
-            {
-                return Results.NotFound();
-            }
+            if (student is null) return Results.NotFound();
 
-            students.Remove(student);
+            studentRepository.Delete(id);
             return Results.NoContent();
         });
 
