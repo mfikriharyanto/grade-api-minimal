@@ -2,7 +2,7 @@ using Grade.Api.Entities;
 
 namespace Grade.Api.Repositories;
 
-public class StudentRepository
+public class StudentRepository : IStudentRepository
 {
     private readonly List<Student> students = new();
 

@@ -6,41 +6,39 @@ public static class StudentsEndpoints
 {
     public static RouteGroupBuilder MapStudentsEndpoints(this IEndpointRouteBuilder routes)
     {
-        StudentRepository studentRepository = new();
-
         var studentRoutes = routes.MapGroup("/api/students");
 
-        studentRoutes.MapGet("/", () => studentRepository.GetAll());
+        studentRoutes.MapGet("/", (IStudentRepository repository) => repository.GetAll());
 
-        studentRoutes.MapPost("/", (Student student) =>
+        studentRoutes.MapPost("/", (IStudentRepository repository, Student student) =>
         {
-            studentRepository.Create(student);
+            repository.Create(student);
             return Results.CreatedAtRoute("Students", new { id = student.Id }, student);
         });
 
-        studentRoutes.MapGet("/{id}", (int id) =>
+        studentRoutes.MapGet("/{id}", (IStudentRepository repository, int id) =>
         {
-            Student? student = studentRepository.Get(id);
+            Student? student = repository.Get(id);
             return student is null ? Results.NotFound() : Results.Ok(student);
         }).WithName("Students");
 
-        studentRoutes.MapPut("/{id}", (int id, Student updatedStudent) =>
+        studentRoutes.MapPut("/{id}", (IStudentRepository repository, int id, Student updatedStudent) =>
         {
-            var existingStudent = studentRepository.Get(id);
+            var existingStudent = repository.Get(id);
 
             if (existingStudent is null) return Results.NotFound();
 
-            studentRepository.Update(id, updatedStudent);
+            repository.Update(id, updatedStudent);
             return Results.NoContent();
         });
 
-        studentRoutes.MapDelete("/{id}", (int id) =>
+        studentRoutes.MapDelete("/{id}", (IStudentRepository repository, int id) =>
         {
-            var student = studentRepository.Get(id);
+            var student = repository.Get(id);
 
             if (student is null) return Results.NotFound();
 
-            studentRepository.Delete(id);
+            repository.Delete(id);
             return Results.NoContent();
         });
 
