@@ -9,3 +9,8 @@ docker run --name mssql -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=[SA_PASSWORD_HE
 ```
 docker exec -it mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P [SA_PASSWORD_HERE]
 ```
+
+## Set the connection string in secret manager
+```
+dotnet user-secrets set "ConnectionStrings:[NAME_HERE]" "Server:localhost; Database=[DATABASE_NAME_HERE]; User Id=sa; password=[SA_PASSWORD_HERE]; TrustServerCertificate=True"
+```
