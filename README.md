@@ -7,5 +7,5 @@ docker run --name mssql -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=[SA_PASSWORD_HE
 ## Connect to Container SQL Server 2019 using sqlcmd
 
 ```
-docker exec -it [CONTAINER_ID_HERE|CONTAINER_NAME_HERE] /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P [SA_PASSWORD_HERE]
+docker exec -it mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P [SA_PASSWORD_HERE]
 ```
