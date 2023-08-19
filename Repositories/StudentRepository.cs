@@ -1,37 +1,42 @@
+using Grade.Api.Data;
 using Grade.Api.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Grade.Api.Repositories;
 
 public class StudentRepository : IStudentRepository
 {
-    private readonly List<Student> students = new();
+    private readonly StudentContext dbContext;
+
+    public StudentRepository(StudentContext dbContext)
+    {
+        this.dbContext = dbContext;
+    }
 
     public IEnumerable<Student> GetAll()
     {
-        return students;
+        return dbContext.Students.AsNoTracking().ToList();
     }
 
     public Student? Get(int id)
     {
-        return students.Find(student => student.Id == id);
+        return dbContext.Students.Find(id);
     }
 
     public void Create(Student student)
     {
-        student.Id = Student.GetSeedId();
-        students.Add(student);
+        dbContext.Students.Add(student);
+        dbContext.SaveChanges();
     }
 
-    public void Update(int id, Student updatedStudent)
+    public void Update(Student updatedStudent)
     {
-        int index = students.FindIndex(student => student.Id == id);
-        updatedStudent.Id = id;
-        students[index] = updatedStudent;
+        dbContext.Update(updatedStudent);
+        dbContext.SaveChanges();
     }
 
     public void Delete(int id)
     {
-        int index = students.FindIndex(student => student.Id == id);
-        students.RemoveAt(index);
+        dbContext.Students.Where(student => student.Id == id).ExecuteDelete();
     }
 }

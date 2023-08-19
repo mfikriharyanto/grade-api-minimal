@@ -34,7 +34,7 @@ public static class StudentsEndpoints
             if (existingStudent is null) return Results.NotFound();
 
             existingStudent.Name = updatedStudentDto.Name;
-            repository.Update(id, existingStudent);
+            repository.Update(existingStudent);
 
             return Results.NoContent();
         });

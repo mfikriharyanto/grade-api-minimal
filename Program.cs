@@ -1,12 +1,13 @@
+using Grade.Api.Data;
 using Grade.Api.Entities;
-using Grade.Api.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddSingleton<IStudentRepository, StudentRepository>();
-
-var conn = builder.Configuration.GetConnectionString("GradeStoreContext");
+builder.Services.AddRepositories(builder.Configuration);
 
 var app = builder.Build();
+
+app.Services.InitializeDb();
+
 app.MapStudentsEndpoints();
 
 app.Run();

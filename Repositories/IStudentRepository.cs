@@ -10,7 +10,7 @@ public interface IStudentRepository
 
     public void Create(Student student);
 
-    public void Update(int id, Student updatedStudent);
+    public void Update(Student updatedStudent);
 
     public void Delete(int id);
 }
