@@ -4,13 +4,13 @@ namespace Grade.Api.Repositories;
 
 public interface IStudentRepository
 {
-    public IEnumerable<Student> GetAll();
+    Task<IEnumerable<Student>> GetAllAsync();
 
-    public Student? Get(int id);
+    Task<Student?> GetAsync(int id);
 
-    public void Create(Student student);
+    Task CreateAsync(Student student);
 
-    public void Update(Student updatedStudent);
+    Task UpdateAsync(Student updatedStudent);
 
-    public void Delete(int id);
+    Task DeleteAsync(int id);
 }

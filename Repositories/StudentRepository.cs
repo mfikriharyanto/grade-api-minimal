@@ -13,30 +13,31 @@ public class StudentRepository : IStudentRepository
         this.dbContext = dbContext;
     }
 
-    public IEnumerable<Student> GetAll()
+    public async Task<IEnumerable<Student>> GetAllAsync()
     {
-        return dbContext.Students.AsNoTracking().ToList();
+        return await dbContext.Students.AsNoTracking().ToListAsync();
     }
 
-    public Student? Get(int id)
+    public async Task<Student?> GetAsync(int id)
     {
-        return dbContext.Students.Find(id);
+        return await dbContext.Students.FindAsync(id);
     }
 
-    public void Create(Student student)
+    public async Task CreateAsync(Student student)
     {
         dbContext.Students.Add(student);
-        dbContext.SaveChanges();
+        await dbContext.SaveChangesAsync();
     }
 
-    public void Update(Student updatedStudent)
+    public async Task UpdateAsync(Student updatedStudent)
     {
         dbContext.Update(updatedStudent);
-        dbContext.SaveChanges();
+        await dbContext.SaveChangesAsync();
     }
 
-    public void Delete(int id)
+    public async Task DeleteAsync(int id)
     {
-        dbContext.Students.Where(student => student.Id == id).ExecuteDelete();
+        await dbContext.Students.Where(student => student.Id == id)
+                                .ExecuteDeleteAsync();
     }
 }
