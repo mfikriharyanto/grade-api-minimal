@@ -1,4 +1,4 @@
-namespace Grade.Api.Entities;
+namespace Grade.Api.Models;
 
 public class Student
 {

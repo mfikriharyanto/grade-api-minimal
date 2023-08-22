@@ -1,5 +1,5 @@
 using Grade.Api.Data;
-using Grade.Api.Entities;
+using Grade.Api.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Grade.Api.Repositories;

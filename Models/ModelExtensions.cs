@@ -1,8 +1,8 @@
 using Grade.Api.Dtos;
 
-namespace Grade.Api.Entities;
+namespace Grade.Api.Models;
 
-public static class EntityExtensions
+public static class ModelExtensions
 {
     public static StudentDto AsDto(this Student student)
     {

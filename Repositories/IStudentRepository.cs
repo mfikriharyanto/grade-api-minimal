@@ -1,4 +1,4 @@
-using Grade.Api.Entities;
+using Grade.Api.Models;
 
 namespace Grade.Api.Repositories;
 
