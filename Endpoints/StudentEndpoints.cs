@@ -1,7 +1,8 @@
 using Grade.Api.Dtos;
+using Grade.Api.Models;
 using Grade.Api.Repositories;
 
-namespace Grade.Api.Models;
+namespace Grade.Api.Endpoints;
 
 public static class StudentsEndpoints
 {

@@ -1,5 +1,5 @@
 using Grade.Api.Data;
-using Grade.Api.Models;
+using Grade.Api.Endpoints;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
