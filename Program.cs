@@ -3,6 +3,10 @@ using Grade.Api.Entities;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication().AddJwtBearer();
+builder.Services.AddAuthorization();
+
 builder.Services.AddRepositories(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();

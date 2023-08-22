@@ -7,7 +7,7 @@ public static class StudentsEndpoints
 {
     public static RouteGroupBuilder MapStudentEndpoints(this IEndpointRouteBuilder routes)
     {
-        var studentRoutes = routes.MapGroup("/api/students");
+        var studentRoutes = routes.MapGroup("/api/students").RequireAuthorization();
 
         studentRoutes.MapGet("/", async (IStudentRepository repository) =>
         {
