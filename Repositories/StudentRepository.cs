@@ -29,15 +29,15 @@ public class StudentRepository : IStudentRepository
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task UpdateAsync(Student updatedStudent)
+    public async Task UpdateAsync(Student student)
     {
-        _dbContext.Update(updatedStudent);
+        _dbContext.Update(student);
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task DeleteAsync(Student student)
     {
-        await _dbContext.Students.Where(student => student.Id == id)
-                                .ExecuteDeleteAsync();
+        _dbContext.Remove(student);
+        await _dbContext.SaveChangesAsync();
     }
 }

@@ -10,7 +10,7 @@ public interface IStudentRepository
 
     Task CreateAsync(Student student);
 
-    Task UpdateAsync(Student updatedStudent);
+    Task UpdateAsync(Student student);
 
-    Task DeleteAsync(int id);
+    Task DeleteAsync(Student student);
 }

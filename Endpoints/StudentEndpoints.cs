@@ -46,7 +46,7 @@ public static class StudentsEndpoints
 
             if (student is null) return Results.NotFound();
 
-            await repository.DeleteAsync(id);
+            await repository.DeleteAsync(student);
             return Results.NoContent();
         });
 
