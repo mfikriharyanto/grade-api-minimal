@@ -19,8 +19,8 @@ public static class DataExtensions
     )
     {
         var conn = configuration.GetConnectionString("GradeStoreContext");
-        services.AddSqlServer<StudentContext>(conn)
-                .AddScoped<IStudentRepository, StudentRepository>();
+        services.AddSqlServer<StudentContext>(conn);
+        services.AddScoped<IStudentRepository, StudentRepository>();
 
         return services;
     }
