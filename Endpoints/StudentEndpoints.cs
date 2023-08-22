@@ -5,7 +5,7 @@ namespace Grade.Api.Entities;
 
 public static class StudentsEndpoints
 {
-    public static RouteGroupBuilder MapStudentsEndpoints(this IEndpointRouteBuilder routes)
+    public static RouteGroupBuilder MapStudentEndpoints(this IEndpointRouteBuilder routes)
     {
         var studentRoutes = routes.MapGroup("/api/students");
 

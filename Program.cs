@@ -10,7 +10,8 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc(
         "v1",
-        new OpenApiInfo {
+        new OpenApiInfo
+        {
             Title = "Grade API",
             Version = "v1",
         });
@@ -20,7 +21,7 @@ var app = builder.Build();
 
 await app.Services.InitializeDbAsync();
 
-app.MapStudentsEndpoints();
+app.MapStudentEndpoints();
 
 app.UseSwagger();
 app.UseSwaggerUI(options =>
