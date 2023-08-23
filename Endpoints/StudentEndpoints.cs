@@ -9,13 +9,13 @@ public static class StudentsEndpoints
 {
     public static RouteGroupBuilder MapStudentEndpoints(this IEndpointRouteBuilder routes)
     {
-        var studentRoutes = routes.MapGroup("/api/students").RequireAuthorization();
+        var studentRoutes = routes.MapGroup("/api/students");
 
         studentRoutes.MapGet("/", async (IStudentRepository repository) =>
         {
             var students = (await repository.GetAllAsync()).Select(student => student.AsDto());
             return TypedResults.Ok(students);
-        });
+        }).AllowAnonymous();
 
         studentRoutes.MapPost("/", async (IStudentRepository repository, CreateStudentDto studenDto) =>
         {
